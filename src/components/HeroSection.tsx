@@ -1,6 +1,6 @@
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useRef } from "react";
-import profileImg from "@/assets/edison_profile.png";
+import heroBg from "@/assets/hero_bg.jpg";
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -20,15 +20,15 @@ const HeroSection = () => {
   return (
     <section ref={ref} className="relative h-[200vh]">
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-        {/* Profile Image with clip-path */}
+        {/* Background Image with clip-path */}
         <motion.div
           className="absolute inset-0 flex items-center justify-center"
           style={{ clipPath }}
         >
           <motion.img
-            src={profileImg}
-            alt="Edison Pasaiz - Video Editor"
-            className="w-full h-full object-cover opacity-40"
+            src={heroBg}
+            alt="Video editing workspace"
+            className="w-full h-full object-cover opacity-50"
             style={{ scale: imgScale }}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-transparent to-background" />
