@@ -1,8 +1,9 @@
-import { useScroll, useTransform, motion } from "framer-motion";
+import { useScroll, useTransform, useSpring, motion } from "framer-motion";
 
 const ScrollPlayhead = () => {
   const { scrollYProgress } = useScroll();
-  const width = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  const width = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
 
   const timestamp = useTransform(scrollYProgress, (v) => {
     const totalSeconds = Math.floor(v * 3600);
@@ -14,12 +15,17 @@ const ScrollPlayhead = () => {
   });
 
   return (
-    <div className="fixed top-0 left-0 w-full z-50">
+    <motion.div
+      className="fixed top-0 left-0 w-full z-50"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 2.5, duration: 0.5 }}
+    >
       <motion.div className="h-[2px] bg-accent origin-left" style={{ width }} />
       <motion.span className="mono-label absolute top-1 right-3 text-accent">
         {timestamp}
       </motion.span>
-    </div>
+    </motion.div>
   );
 };
 
