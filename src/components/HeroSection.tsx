@@ -2,6 +2,8 @@ import { useScroll, useTransform, motion, useSpring } from "framer-motion";
 import { useRef } from "react";
 import heroBg from "@/assets/hero_bg.jpg";
 
+const easeOut = [0.19, 1, 0.22, 1] as const;
+
 const letterVariants = {
   hidden: { y: 100, opacity: 0 },
   visible: (i: number) => ({
@@ -10,7 +12,7 @@ const letterVariants = {
     transition: {
       delay: 0.8 + i * 0.04,
       duration: 0.8,
-      ease: [0.19, 1, 0.22, 1],
+      ease: easeOut as unknown as [number, number, number, number],
     },
   }),
 };
@@ -20,7 +22,7 @@ const fadeUp = {
   visible: (delay: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay, duration: 0.8, ease: [0.19, 1, 0.22, 1] },
+    transition: { delay, duration: 0.8, ease: easeOut as unknown as [number, number, number, number] },
   }),
 };
 
